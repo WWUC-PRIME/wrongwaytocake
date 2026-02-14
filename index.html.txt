@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lonely Cookie</title>
+<style>
+body {
+    margin: 0;
+    background-color: #000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+    color: #eaeaea;
+}
+
+/* A lebegő süti */
+.cookie {
+    width: 12px;
+    height: 12px;
+    background-color: #ff6f61; /* pici színes süti */
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    animation: float 3s ease-in-out infinite alternate;
+}
+
+/* lebegés animáció */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-20px); }
+}
+
+/* morzsák */
+.morsha {
+    width: 4px;
+    height: 4px;
+    background-color: #ffb86c;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* a szöveg */
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    font-size: 18px;
+    line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div class="cookie" onclick="showMessage(event)"></div>
+<div class="message" id="message">
+    A tiny piece of cookie.<br>
+    No one knows where it came from.<br>
+    It grows alone in a world of its own.
+</div>
+
+<script>
+// kattintásra megjelenő szöveg
+function showMessage(e) {
+    const msg = document.getElementById('message');
+    msg.style.opacity = '1';
+    createMorsha(e.clientX, e.clientY);
+}
+
+// apró morzsák létrehozása
+function createMorsha(x, y) {
+    for (let i = 0; i < 5; i++) {
+        const morsha = document.createElement('div');
+        morsha.className = 'morsha';
+        document.body.appendChild(morsha);
+
+        morsha.style.left = x + 'px';
+        morsha.style.top = y + 'px';
+        morsha.style.opacity = '1';
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 30 + Math.random() * 20;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        morsha.animate([
+            { transform: 'translate(0px,0px)', opacity: 1 },
+            { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 }
+        ], {
+            duration: 1500 + Math.random() * 500,
+            easing: 'ease-out'
+        });
+
+        setTimeout(() => {
+            morsha.remove();
+        }, 2000);
+    }
+}
+</script>
+
+</body>
+</html>
