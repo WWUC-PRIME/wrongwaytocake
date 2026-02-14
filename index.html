@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Tiny Piece</title>
+<style>
+body {
+    margin: 0;
+    background: #000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: monospace;
+    color: #eaeaea;
+}
+
+/* konténer (fontos a rétegezéshez) */
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* a süti */
+.cookie {
+    width: 28px;
+    height: 28px;
+    background: radial-gradient(circle at 30% 30%, #ffb347, #b5651d);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    animation: float 4s ease-in-out infinite alternate;
+    box-shadow: 0 0 12px rgba(255, 180, 120, 0.2);
+    z-index: 2;
+}
+
+/* csokidarabok */
+.cookie::before,
+.cookie::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #3a1f0f;
+    border-radius: 50%;
+}
+
+.cookie::before {
+    top: 6px;
+    left: 7px;
+}
+
+.cookie::after {
+    bottom: 7px;
+    right: 6px;
+}
+
+/* lebegés */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-18px); }
+}
+
+/* SZÖVEG – garantált középre */
+.message {
+    position: absolute;
+    top: 70px; /* a süti alatt jelenik meg */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 420px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    line-height: 1.6;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="cookie" onclick="reveal()"></div>
+
+    <div class="message" id="msg">
+        A tiny piece of cookie.<br>
+        No one knows where it came from.<br>
+        It grows alone in a world of its own.
+    </div>
+</div>
+
+<script>
+function reveal() {
+    const msg = document.getElementById("msg");
+    msg.style.opacity = "1";
+}
+</script>
+
+</body>
+</html>
