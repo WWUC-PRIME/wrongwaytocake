@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Archive</title>
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    text-align: center;
+}
+
+.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text {
+    max-width: 600px;
+    line-height: 1.8;
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 40px;
+    font-size: 40px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.arrow:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.small {
+    position: absolute;
+    bottom: 10px;
+    font-size: 11px;
+    color: #222;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- OLDAL 1 – ARCHÍVUM KÖSZÖNTŐ -->
+<div class="page active" id="page1">
+    <div class="text">
+        You found the archive.<br><br>
+        A collection of small crumbs.<br>
+        Drifting somewhere in the wrong direction.
+    </div>
+    <div class="arrow" onclick="nextPage()">→</div>
+    <div class="small">safe page • no ads • no tracking</div>
+</div>
+
+<!-- OLDAL 2 – MAGÁNYOS MORZSA -->
+<div class="page" id="page2">
+    <div class="text">
+        A small crumb floats.<br><br>
+        It does not know where it came from.<br>
+        It keeps drifting anyway.
+    </div>
+    <div class="arrow" onclick="nextPage()">→</div>
+</div>
+
+<!-- OLDAL 3 – ICE POÉN -->
+<div class="page" id="page3">
+    <div class="text">
+        It is cold here.<br><br>
+        There are too many <span style="color:#9fdcff; letter-spacing:3px;">ICE</span> asteroids.<br>
+        This was not a safe direction.
+    </div>
+    <div class="arrow" onclick="nextPage()">→</div>
+</div>
+
+<!-- OLDAL 4 – TITKOS JUTALOM HANGULAT -->
+<div class="page" id="page4">
+    <div class="text">
+        The crumb evolved.<br><br>
+        Still drifting.<br>
+        Still wrong.
+    </div>
+</div>
+
+<script>
+let currentPage = 1;
+const totalPages = 4;
+
+function nextPage() {
+    document.getElementById("page" + currentPage).classList.remove("active");
+    currentPage++;
+    if (currentPage > totalPages) currentPage = totalPages;
+    document.getElementById("page" + currentPage).classList.add("active");
+}
+</script>
+
+</body>
+</html>
